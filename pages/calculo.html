@@ -1,0 +1,40 @@
+<div class="container">
+	<h2 class="text-center" id="form">Realizar Cálculo</h2>
+	<div class="row">
+		<div class="col-md-6">
+			<form name="formDados">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group">
+							<label>Nome</label>
+							<input class="form-control" ng-class="{'border-red': !dado.nome}"  type="text" name="nome" placeholder="Nome" ng-required="true" ng-model="dado.nome"/>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>Altura</label>
+							<input class="form-control" ng-class="{'border-red': !dado.altura}" type="number" name="altura" placeholder="Altura" ng-required="true" ng-model="dado.altura"/>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>Peso</label>
+							<input class="form-control" ng-class="{'border-red': !dado.peso}" type="number" name="peso" placeholder="Peso" ng-required="true" ng-model="dado.peso"/>
+						</div>
+					</div>
+				</div>
+				<button class="btn btn-primary" ng-click="salvarDados(dado)" ng-disabled="formDados.$invalid">Salvar Dados</button>
+			</form>
+
+		</div>
+		<div class="col-md-6">
+			<div class="imc" ng-show="dado.peso && dado.altura">
+				<p class="text-center" ng-class="{'text-success': (dado.peso/(dado.altura*dado.altura)<24.99) && (dado.peso/(dado.altura*dado.altura)>18.5), 'text-danger': (dado.peso/(dado.altura*dado.altura)>24.99) || (dado.peso/(dado.altura*dado.altura)<18.5) }" id="num-imc">{{ dado.peso/(dado.altura*dado.altura) | number:2 }}</p>
+				<p class="text-center">IMC</p>
+			</div>
+			
+		</div>
+	</div>
+</div>

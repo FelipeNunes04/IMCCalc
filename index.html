@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html ng-app="calculoImc">
+	<head>
+		<meta charset="utf-8">
+		<title>Cálculo de IMC</title>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css">
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+
+	</head>
+	<body>
+		<nav class="navbar navbar-default">
+  			<div class="container-fluid">
+			    <div class="navbar-header">
+			      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+			        <span class="sr-only">Toggle navigation</span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			      </button>
+			      <a class="navbar-brand" href="#"><img id="logo" src="images/logo.png"></a>
+			    </div>
+			    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			      <ul class="nav navbar-nav">
+			        <li ng-class="{'active': activetab == '/'}"><a href="#/home">Home</a></li>
+			        <li ng-class="{'active': activetab == '/calculo'}"><a href="#/calculo">Realizar Cálculo</a></li>
+			        <li ng-class="{'active': activetab == '/dados'}"><a href="#/dados">Dados Salvos</a></li>
+			      </ul>
+			    </div><!-- /.navbar-collapse -->
+			</div><!-- /.container-fluid -->
+		</nav>
+
+		<div ng-view></div>
+
+		<footer id="footer">
+		 <div class="footer-bottom">
+		  <div class="container">
+		    <div class="row">
+		      <div class="col-sm-12 text-center">
+		        <p>&copy; 2016 Felipe Nunes</p>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		</footer>
+
+		<script src="lib/angular.js"></script>
+		<script src="lib/angular-route.min.js"></script>
+		<script src="js/app.js"></script>
+		<script src="js/controllers/homeCtrl.js"></script>
+		<script src="js/controllers/dadosCtrl.js"></script>
+		<script src="js/controllers/calculoCtrl.js"></script>
+	</body>
+</html>

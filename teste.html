@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+	<title></title>
+</head>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+<script type="text/javascript">
+	var app = angular.module('app', []);
+
+app.run(function ($rootScope) {
+    $rootScope.$on('scope.stored', function (event, data) {
+        console.log("scope.stored", data);
+    });
+});
+app.controller('OneController', function ($scope, Scopes) {
+
+    Scopes.store('OneController', $scope);
+		
+    $scope.variable1 = "One";
+
+    $scope.buttonClick = function () {
+        console.log("OneController");
+        console.log("OneController::variable1", Scopes.get('OneController').variable1);
+        console.log("TwoController::variable1", Scopes.get('TwoController').variable1);
+        console.log("$scope::variable1", $scope.variable1);
+    };
+
+    $scope.buttonClickOnTwoController = function () {
+        Scopes.get('TwoController').buttonClick();
+    };
+});
+app.controller('TwoController', function ($scope, Scopes) {
+
+    Scopes.store('TwoController', $scope);
+
+    $scope.variable1 = "Two";
+
+    $scope.buttonClick = function () {
+        console.log("TwoController");
+        console.log("OneController::variable1", Scopes.get('OneController').variable1);
+        console.log("TwoController::variable1", Scopes.get('TwoController').variable1);
+        console.log("$scope::variable1", $scope.variable1);
+    };
+
+    $scope.buttonClickOnOneController = function () {
+        Scopes.get('OneController').buttonClick();
+    };
+});
+app.factory('Scopes', function ($rootScope) {
+    var mem = {};
+
+    return {
+        store: function (key, value) {
+            $rootScope.$emit('scope.stored', key);
+            mem[key] = value;
+        },
+        get: function (key) {
+            return mem[key];
+        }
+    };
+});
+</script>
+<body>
+<div ng-app="app">
+    <div ng-controller="OneController">
+    <h2>OneController</h2>
+    <button ng-click="buttonClick()">
+        buttonClick on current scope
+    </button>
+    <button ng-click="buttonClickOnTwoController()">
+        buttonClick on TwoController's scope
+    </button>
+</div>
+
+<div ng-controller="TwoController">
+    <h2>TwoController</h2>
+    <button ng-click="buttonClick()">
+        buttonClick on current scope
+    </button>
+    <button ng-click="buttonClickOnOneController()">
+        buttonClick on OneController's scope
+    </button>
+</div>
+</div>
+</body>
+</html>

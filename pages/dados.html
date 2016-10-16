@@ -1,0 +1,23 @@
+<div class="container">	
+	<h2 class="text-center" id="table">Tabela de Dados</h2>
+	<div class="row">
+		<div class="col-md-12">
+			<table class="table table-striped">
+				<thead>
+					<th>Nome</th>
+					<th>Peso</th>
+					<th>Altura</th>
+					<th>IMC</th>
+					<th>Classificação</th>
+				</thead>
+				<tr ng-repeat="d in dados">
+					<td>{{d.nome}}</td>
+					<td>{{d.peso}}</td>
+					<td>{{d.altura}}</td>
+					<td>{{d.imc | number:2}}</td>
+					<td>{{d.classificacao}}</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>
